@@ -1,0 +1,227 @@
+*modeleasy-plugin.txt*                                                      *modeleasy-plugin*
+				 Modeleasy-Vim-plugin~
+			     Plugin to work with Modeleasy~
+
+Author: Massimiliano Tripoli   <massimiliano.tripoli@gmail.com>
+
+Version: 1.0
+For Vim version 7.3
+
+ 1. Overview                                    |modeleasy-plugin-overview|
+ 2. Installation                                |modeleasy-plugin-installation|
+ 3. Map                                         |modeleasy-plugin-map|
+ 4. Test                                        |modeleasy-plugin-test|
+
+======================================================================================================================
+
+                                                        *modeleasy-plugin-overview*
+
+1. Overview~
+
+
+This plugin provides syntax highlighting for Modeleasy + improving Vim's support for editing Modeleasy + code in 
+both normal and visual mode. It uses some codes lines from
+Jakson A. Aquino (vim-rplugin).
+
+Modeleasy + is an econometric modelling package available for different operating systems.
+Form more information visit http://www.modeleasy.com/.
+
+The plugin includes:
+
+  * Syntax highlighting for
+      - Special characters support;
+      - Key Statement functions;
+      - Modeleasy + functions.
+  * Key map to comment and uncomment lines.
+  * Some others utilities such as insert a pause useful to debug a program or convert character from lower case to upper
+    case and viceversa.
+
+ Please submit bug reports and feature requests to Massimiliano Tripoli 
+<massimiliano.tripoli@gmail.com>.
+
+
+
+
+
+
+
+
+======================================================================================================================
+
+                                                      *modeleasy-plugin-installation*
+
+2. Installation~
+
+
+
+
+
+2.1 Basic Installation  
+
+
+
+
+
+ Download and install the lat vim (gvim) release and copy the Vimball archive "modeleasy-vim-plugin-*.vba" in a temporary directory.
+Open the file with vim and do:
+>
+
+	:so %
+	:q
+
+<
+
+
+If vimrc file exists (else make a new one) add on the following lines:
+
+
+
+>
+
+	set number
+	set nocompatible
+	syntax enable
+	filetype plugin on
+	filetype indent on
+
+<
+
+ Open vim and do:
+
+>
+
+	:helptags ~/.vim/doc
+
+< 
+
+  It builds the tags file for this plugin (and others ones that eventually
+  are in the same directory). 
+
+Start to open a '.deck' file or create a new one to check if the plugin work properly.
+
+
+======================================================================================================================
+
+                                                       *modeleasy-plugin-map*
+
+3. Map~
+
+
+
+
+This plugin has some very basic functions such as comment (uncomment) lines or insert a
+   pause. If you want to disable them add this following line to your vimrc file:
+
+>
+
+	let map_modeasy = 0
+ 
+<
+
+3.1 Comment lines
+
+If you want to use key map to comment/uncomment type <C-k> lines both in visual or normal mode
+   or use simply the menu button. To insert a comment at the end of line type <C-j>.
+
+To insert a pause in your program type <C-p>, the plugin will insert at the beginning of the current line
+
+	  "  " pause;~
+
+  with a prompt in insert mode to insert whatever label as string.
+
+To switch from lower to upper case and viceversa you can use <C-u> / <C-l>.
+
+If you want to disable modeleasyvim plugin you have to add 
+
+>
+
+        let disable_modeasy_ftplugin = 0
+
+
+<
+   to your vimrc file.
+
+======================================================================================================================
+
+                                                       *modeleasy-plugin-test*
+
+4. Test~
+
+
+4.1
+
+If you want to test the modeleasy-vim-plugin create a file test.deck or test.dec and copy and paste the following lines:
+
+
+>
+
+	program 
+
+
+	$ Program to test Modeleasy vim plugin
+
+	$ Author : Massimiliano Tripoli 
+	$
+	$ ***********************************************************;
+	$ Test conditions
+
+	x = 2
+	if (x .eq. 2) then 
+
+	  type("x = 2") 
+
+	 test2(a, b, c, d, ans)
+	  ab = a * b
+	if ( c .ne. 0 ) then 
+
+	  abc = ab/c
+	  ans = abc * d
+	 
+	else 
+	 
+	if 
+	  goto = label1
+	endif 
+
+	 
+	U+0000 
+
+	$ Special char 
+	"\s"
+
+	str = "String Character"
+
+	library ( mylib "/home/user/speakez/mylib")
+	   
+	$ Try to comment by <C-k> in visual mode the 3 following lines:
+
+	first line to comment
+	second line to comment
+	third line to comment
+
+	$ Try to comment by <C-j> in normal mode the following line:
+	comment at the bottom
+
+	$ Try to insert a pause by <C-p> in normal mode after this line:
+
+	$ This is wrong
+
+	10 *** 5
+
+	$ This is correct
+
+	10 * 5
+
+	$ *******************************************************************************************************
+	cd("/home/user/speakez")
+
+	$ These are some modeleasy functions:
+        keepdif x :replace
+		norows(x)
+		assign(18,"x.txt")
+		write(18,fmt:x)
+	end
+
+<
+
+======================================================================================================================

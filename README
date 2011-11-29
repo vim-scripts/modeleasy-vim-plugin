@@ -1,0 +1,5 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=3827
+
+
+This plugin provides syntax highlighting for Modeleasy improving Vim's support for editing Modeleasy + code in both normal and visual mode.
+It provides also some utilities such as comment or uncomment lines of programs.
