@@ -1,24 +1,19 @@
 " Vim syntax file
-" Language:	      Modeleasy (linux)
-" Maintainer:	      Massimiliano Tripoli <massimiliano.tripoli@gmail.com>
-" Last Change:	      sab 26 nov 2011, 09:55
+" ====================================================================
+" Language:	     Modeleasy +
+" Maintainer:	     Massimiliano Tripoli <massimiliano.tripoli@gmail.com>
+" Last Change:       sab  5 mag 2012, 09:33
 " Filenames:	      *.deck
-" 
 " NOTE: The highlighting of modeleasy functions is defined in the
-" syntax/modeleasyfunctions.vim and syntax/modeasy.vim
-"
-" The utilities of modeleasy are defined in the
-" ftplugin/utilities.vim
-"
+"       syntax/modeleasyfunctions.vim and syntax/modeasy.vim
+"       The utilities of plugin are defined in the
+"       plugin/modeleasyutilities.vim
+" ====================================================================
+" 
 " Some lines of code were borrowed from
 " Jakson Aquino <jalvesaq@gmail.com> (r-vimplugin)
 "
 "
-" Red Hat Linux Modeleasy+  5.6 (Build 536)  1:54 PM September 6, 2011
-" Copyright 1997,-2009, Bank of Italy, Rome for the Modeleasy+ components only.
-" Copyright 1978,-2009 Speakeasy Computing Corporation Chicago, IL
-" for the Speakeasy components only.
-"	 See www.speakeasy.com for news, updates and downloads
 "
 if exists("g:disable_modeasy_ftplugin") 
   finish
@@ -56,35 +51,38 @@ syn match modeasySpecial display contained "\\U\x\{1,8}"
 syn match modeasySpecial display contained "\\u{\x\{1,4}}"
 syn match modeasySpecial display contained "\\U{\x\{1,8}}"
 " Modeasy special options
-syn keyword modeasySpecial add all arrays1d arrays2d auto automatic ave backfill baseout blank bottom ca
-syn keyword modeasySpecial charlits cleanup clear colhead color cumulated datafiles decimals disp display
-syn keyword modeasySpecial drop dynamic everything far forecast fullnewton henceforth impact instrument 
-syn keyword modeasySpecial interim interp jacobi linear logarithmic mgs modelfile namelits nave near newton 
-syn keyword modeasySpecial nsum num objectives off on only outunit print printnull protected rationalize rep 
-syn keyword modeasySpecial replace rowhead show significance static stock sum suppress system timeseries 
-syn keyword modeasySpecial title top trace user width word zero        
+syn keyword modeasyOption add all arrays1d arrays2d auto automatic ave backfill baseout blank bottom ca
+syn keyword modeasyOption charlits cleanup clear colhead color cumulated datafiles decimals disp display
+syn keyword modeasyOption drop dynamic everything far forecast fullnewton henceforth impact instrument 
+syn keyword modeasyOption interim interp jacobi linear logarithmic mgs modelfile namelits nave near newton 
+syn keyword modeasyOption nsum num objectives off on only outunit print printnull protected rationalize rep 
+syn keyword modeasyOption replace rowhead show significance static stock sum suppress system timeseries 
+syn keyword modeasyOption title top trace user width word zero        
 
 syn match modeasyBackSpace contained "\s\+"
 " Match error at beginning of the text
-syn region modeasyStartError contains=modeasyBackSpace start=/\%^.*/ end=/$/ 
-
+syn region modeasyStartError contains=modeasyBackSpace start=/\%^/ end=/$/ 
+" Match error in if then block
+syn region modeasyIfThenError start="then"hs=s+4  contains=modeasyThen,modeasyBackSpace,modeasyComment end="$" oneline 
+" Syntax highlighting until end statement
+syn region modeasyEndProgram start="end"hs=s+3  contains=modeasyEnd end="\%$"
 " Statement
 
 syn keyword modeasyStatement   break 
 syn keyword modeasyRepeat      for in repeat while do next endloop endfor endwhile
 syn keyword modeasyPause       pause 
-syn keyword modeasyConditional if then else endif where goto as
+syn keyword modeasyConditional if else endif where goto as
 
-syn match  modeasyunitHeader display "program"
-syn match  modeasyunitHeader display "model"
-syn match  modeasyunitHeader display "data"
-syn match  modeasyunitHeader display "subroutine"
-syn match  modeasyunitHeader display "return"
-syn match  modeasyunitHeader display "end"
+syn match  modeasyunitHeader display"\<program\>"
+syn match  modeasyunitHeader display "\<model\>"
+syn match  modeasyunitHeader display "\<data\>"
+syn match  modeasyunitHeader display "\<subroutine\>"
+syn match  modeasyunitHeader display "\<return\>"
+syn match  modeasyThen display contained "\<then\>"
+syn match  modeasyEnd display contained "\<end\>"
 
 " Constant 
 syn keyword modeasyConstant pi piover2 piover180 180overpi sqrtpi log10e lnofsqrtof2
-
 
 " integer
 syn match modeasyInteger "\<\d\+L"
@@ -125,7 +123,7 @@ syn match modeasyBoolean display contained '\.\(ge\|et\|eq\|le\|gt\|ne\|lt\)\.'
 syn match modeasyDelimiter "[,;:&]"
 syn match modeasyDelimiter "[,;:&]" contained
 " Error
-syn region modeasyRegion matchgroup=Delimiter start=/(/ matchgroup=Delimiter end=/)/ transparent contains=ALLBUT,modeasyError,modeasyBraceError,modeasyCurlyError contains=modeasyOption
+syn region modeasyRegion matchgroup=Delimiter start=/(/ matchgroup=Delimiter end=/)/ transparent contains=ALLBUT,modeasyError,modeasyBraceError,modeasyCurlyError 
 syn region modeasyRegion matchgroup=Delimiter start=/{/ matchgroup=Delimiter end=/}/ transparent contains=ALLBUT,modeasyError,modeasyBraceError,modeasyParenError
 syn region modeasyRegion matchgroup=Delimiter start=/\[/ matchgroup=Delimiter end=/]/ transparent contains=ALLBUT,modeasyError,modeasyCurlyError,modeasyParenError
 
@@ -173,6 +171,11 @@ hi def link modeasyOperatorError Error
 hi def link modeasyStartError  Error
 hi def link modeasyDelimiter   Delimiter
 hi def link modeasyBackSpace   Normal
-
+hi def link modeasyIfThenError Error
+hi def link modeasyThen        Conditional
+hi def link modeasyEndProgram  Normal
+hi def link modeasyEnd         PreProc
+hi def link modeasyStart       PreProc	 
+hi def link modeasyOption      SpecialChar
 let b:current_syntax="modeasy.vim"
 

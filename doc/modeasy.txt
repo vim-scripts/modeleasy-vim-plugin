@@ -1,4 +1,4 @@
-*modeleasy-plugin.txt*                                                      *modeleasy-plugin*
+modeleasy-plugin.txt*                                                      *modeleasy-plugin*
 				 Modeleasy-Vim-plugin~
 			     Plugin to work with Modeleasy~
 
@@ -56,13 +56,11 @@ The plugin includes:
 
 
 
-2.1 Basic Installation  
 
 
 
 
-
- Download and install the lat vim (gvim) release and copy the Vimball archive "modeleasy-vim-plugin-*.vba" in a temporary directory.
+ Download and install the last vim (gvim) release and copy the Vimball archive "modeleasy-vim-plugin-*.vba" in a temporary directory.
 Open the file with vim and do:
 >
 
@@ -71,8 +69,7 @@ Open the file with vim and do:
 
 <
 
-
-If vimrc file exists (else make a new one) add on the following lines:
+Create a vimrc file if you don't have one yet and add the following lines:
 
 
 
@@ -118,10 +115,10 @@ This plugin has some very basic functions such as comment (uncomment) lines or i
  
 <
 
-3.1 Comment lines
 
 If you want to use key map to comment/uncomment type <C-k> lines both in visual or normal mode
-   or use simply the menu button. To insert a comment at the end of line type <C-j>.
+   or use simply the menu button.
+To insert a comment at the end of line, go to the line to comment and type <C-j>.
 
 To insert a pause in your program type <C-p>, the plugin will insert at the beginning of the current line
 
@@ -131,7 +128,23 @@ To insert a pause in your program type <C-p>, the plugin will insert at the begi
 
 To switch from lower to upper case and viceversa you can use <C-u> / <C-l>.
 
-If you want to disable modeleasyvim plugin you have to add 
+There is an help map of modeleasy functions that works simply by using the a key map.
+Put the cursor at the beginning of the word for which you need some help and type <C-h>.
+To work properly it must set the correct help modeleasy directory and your current file browser 
+by adding two global variables to your .vimrc file. The browser variable must be set only for *nix operating system.
+For example if your browser is firefox and your operating system is linux you should 
+have the following two lines in your vimrc file:
+
+>
+ 
+   	let g:modeasy_dir_help = "path to help directory"   
+	let g:browser = "firefox"
+  
+<
+
+Otherwise if your operating system is Win32 you must only set the g:modeasy_dir_help.
+Pay attention using a double backslash "\\" as path separator.  
+If you want to disable modeleasy-vim plugin you should add the following
 
 >
 
@@ -148,7 +161,6 @@ If you want to disable modeleasyvim plugin you have to add
 4. Test~
 
 
-4.1
 
 If you want to test the modeleasy-vim-plugin create a file test.deck or test.dec and copy and paste the following lines:
 
